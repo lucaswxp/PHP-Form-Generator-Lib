@@ -1,3 +1,7 @@
+Goal
+============
+This library has the goal of make simple the creation and population of HTML forms
+
 Usage example
 =============
 
@@ -18,7 +22,7 @@ Usage example
 			)
 			->add('<ul>')
 			->add(
-				Form::checkboxes('interests[]') // create a collection of checkboxes
+				Form::checkboxes('interests[]') // create a collection of checkboxeseaa
 					->add('games', 'Games')
 					->add('animes', 'Animes')
 					->add('o_thing', 'Other things')
