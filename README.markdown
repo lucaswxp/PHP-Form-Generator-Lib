@@ -16,6 +16,7 @@ Usage example
 					->add('M', 'Male') // add a radio with value "M" and label "Male"
 					->add('F', 'Female') // add a radio with value "F" and label "Female"
 			)
+			->add('<ul>')
 			->add(
 				Form::checkboxes('interests[]') // create a collection of checkboxes
 					->add('games', 'Games')
@@ -23,6 +24,7 @@ Usage example
 					->add('o_thing', 'Other things')
 					->setWrapper(Html::tag('li')->setClass('li-item')) // changes the wrapper, default is div
 			)
+			->add('</ul>')
 			->add(
 				Form::select('songs[]')->setMultiple(true) // create a select multiple input
 					->add('sth', 'Stairway to Heaven')
