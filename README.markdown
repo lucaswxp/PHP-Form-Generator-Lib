@@ -1,5 +1,8 @@
-<?php
+Usage example
+=============
+
 ```
+<?php
 		require_once 'fg/load.php';
 
 		$form = Form::create('formaction.php'); // form action attribute
@@ -33,7 +36,9 @@
 		
 		echo $form; // or echo $form->render()
 ```
+
 If you wanna populate your form, you can use the populate method:
+
 		
 ```
 		$form->populate(array(
