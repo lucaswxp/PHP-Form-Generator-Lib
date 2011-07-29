@@ -2,6 +2,10 @@ Goal
 ============
 This library has the goal of make simple the creation and population of HTML forms
 
+API
+============
+http://pelegrinodev.com/repos/fg/api/
+
 Usage example
 =============
 
