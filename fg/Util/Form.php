@@ -31,7 +31,7 @@ class Form{
 		$form = new FG_HTML_Element_Form();
 		return $form->setAction($action);
 	}
-	
+
 /**
  * Create a new text input
  * 
@@ -40,6 +40,16 @@ class Form{
  */
 	public static function text($name){
 		return self::input('text', $name);
+	}
+	
+/**
+ * Create a new submit input
+ * 
+ * @param string $name The value attribute
+ * @return FG_HTML_Form_Input_Submit
+ */
+	public static function submit($value){
+		return self::input('submit', $value);
 	}
 	
 /**
@@ -157,6 +167,9 @@ class Form{
 			case 'hidden':
 				$in = new FG_HTML_Form_Input_Hidden();
 			break;
+			case 'submit':
+				$in = new FG_HTML_Form_Input_Submit();
+			break;
 			case 'checkbox':
 				$in = new FG_HTML_Form_Input_Checkbox();
 			break;
@@ -167,6 +180,11 @@ class Form{
 				$in = new FG_HTML_Form_Input_Select();
 			break;
 		}
-		return $in->setName($name);
+		
+		if($input == 'submit')
+			$in->setValue($name);
+		else
+			$in->setName($name);
+		return $in;
 	}
 }

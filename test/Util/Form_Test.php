@@ -22,6 +22,7 @@ class Form_Test extends PHPUnit_Framework_TestCase{
 		$this->assertInstanceOf('FG_HTML_Form_Input_Radio', Form::radio('name'));
 		$this->assertInstanceOf('FG_HTML_Form_Input_Checkbox', Form::checkbox('name'));
 		$this->assertInstanceOf('FG_HTML_Form_Input_Text', Form::text('invalid'));
+		$this->assertInstanceOf('FG_HTML_Form_Input_Submit', Form::submit('val'));
 		$this->assertInstanceOf('FG_HTML_Form_Input_File', Form::file('name'));
 		$this->assertInstanceOf('FG_HTML_Form_Input_Password', Form::password('name'));
 		$this->assertInstanceOf('FG_HTML_Element_Form', Form::create('action'));

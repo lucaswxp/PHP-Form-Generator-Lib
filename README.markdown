@@ -5,7 +5,7 @@ This library has the goal of make simple the creation and population of HTML for
 Usage example
 =============
 
-```
+```php
 <?php
 		require_once 'fg/load.php';
 
@@ -46,7 +46,7 @@ Usage example
 If you wanna populate your form, you can use the populate method:
 
 		
-```
+```php
 		$form->populate(array(
 			'user' => array(
 				'name' => 'myuser_name' // user[name] field
