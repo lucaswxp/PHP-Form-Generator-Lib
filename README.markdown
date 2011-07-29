@@ -47,6 +47,7 @@ If you wanna populate your form, you can use the populate method:
 
 		
 ```php
+<?php
 		$form->populate(array(
 			'user' => array(
 				'name' => 'myuser_name' // user[name] field
