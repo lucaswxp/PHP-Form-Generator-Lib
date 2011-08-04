@@ -7,11 +7,11 @@
  */
 
 require_once dirname(__FILE__) . '/FG_HTML_Form_Input_Fillable.php';
-require_once dirname(__FILE__) . '/FG_HTML_Form_Input_Identifiable.php';
+require_once dirname(__FILE__) . '/FG_HTML_Form_Input_AbstractIdentifiable.php';
 require_once dirname(dirname(dirname(__FILE__))) . '/FG_HTML_Element.php';
 require_once dirname(dirname(dirname(__FILE__))) . '/Element/FG_HTML_Element_Label.php';
 
-abstract class FG_HTML_Form_Input_AbstractInput implements FG_HTML_Form_Input_Fillable, FG_HTML_Form_Input_Identifiable{
+abstract class FG_HTML_Form_Input_AbstractInput extends FG_HTML_Form_Input_AbstractIdentifiable implements FG_HTML_Form_Input_Fillable, FG_HTML_Form_Input_Identifiable{
 
 /**
  * Before's content

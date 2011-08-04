@@ -7,12 +7,12 @@
  */
 
 require_once dirname(dirname(__FILE__)) . '/FG_HTML_Form_Input_Fillable.php';
-require_once dirname(dirname(__FILE__)) . '/FG_HTML_Form_Input_Identifiable.php';
+require_once dirname(dirname(__FILE__)) . '/FG_HTML_Form_Input_AbstractIdentifiable.php';
 require_once dirname(dirname(__FILE__)) . '/FG_HTML_Form_Input_Hidden.php';
 require_once dirname(dirname(dirname(dirname(__FILE__)))) . '/FG_HTML_Element.php';
 require_once dirname(dirname(dirname(dirname(__FILE__)))) . '/Element/FG_HTML_Element_Label.php';
 
-abstract class FG_HTML_Form_Input_Collection_AbstractCollection implements FG_HTML_Form_Input_Fillable,FG_HTML_Form_Input_Identifiable{
+abstract class FG_HTML_Form_Input_Collection_AbstractCollection extends FG_HTML_Form_Input_AbstractIdentifiable implements FG_HTML_Form_Input_Fillable{
 	
 /**
  * This itens of this collection

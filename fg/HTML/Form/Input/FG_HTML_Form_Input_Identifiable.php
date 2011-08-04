@@ -14,4 +14,11 @@ interface FG_HTML_Form_Input_Identifiable{
  * @return string
  */
 	public function getName();
+	
+/**
+ * Get name without the array part
+ * 
+ * @return string
+ */
+	public function getBaseName();
 }
