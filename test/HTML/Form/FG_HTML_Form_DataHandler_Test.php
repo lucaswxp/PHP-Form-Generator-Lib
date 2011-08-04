@@ -165,6 +165,19 @@ class FG_HTML_Form_DataHandler_Test extends PHPUnit_Framework_TestCase{
  * 
  * @return void
  */
+	public function testGetOnlyFieldsFromAddedContent(){
+		$tag = new FG_HTML_Form_DataHandler();
+		$text = new FG_HTML_Form_Input_Text();
+		$textarea = new FG_HTML_Form_Input_TextArea();
+		
+		$this->assertEquals(2, count($tag->add($text)->add('dummy')->add($textarea)->add('another')->getFillable()));
+	}
+	
+/**
+ * test method
+ * 
+ * @return void
+ */
 	public function testAddFileInput(){
 		$tag = new FG_HTML_Form_DataHandler();
 		$text = new FG_HTML_Form_Input_Text();
@@ -185,7 +198,7 @@ class FG_HTML_Form_DataHandler_Test extends PHPUnit_Framework_TestCase{
  * 
  * @return void
  */
-	public function testCompleteFormAndPopulatedFields(){
+	public function testCompleteForm(){
 		$form = new FG_HTML_Form_DataHandler();
 		
 		$user['name'] = new FG_HTML_Form_Input_Text();

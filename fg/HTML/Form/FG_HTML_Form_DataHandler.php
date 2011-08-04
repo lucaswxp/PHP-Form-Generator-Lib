@@ -66,6 +66,23 @@ class FG_HTML_Form_DataHandler{
 	}
 	
 /**
+ * Get contents that implements FG_HTML_Form_Input_Fillable, usually fields are
+ * 
+ * @return array
+ */
+	public function getFillable(){
+		$fillable = array();
+		
+		foreach($this->content as $content){
+			if(is_a($content, 'FG_HTML_Form_Input_Fillable')){
+				$fillable[] = $content;
+			}
+		}
+		
+		return $fillable;
+	}
+	
+/**
  * Gets $path from the data
  * 
  * @param string $path
