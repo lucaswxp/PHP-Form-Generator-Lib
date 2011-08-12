@@ -132,12 +132,12 @@ class FG_HTML_Form_Input_Select extends FG_HTML_Form_Input_AbstractInput impleme
 	}
 	
 /**
- * Get HTML representation of this select
+ * Gets field
  * 
  * @return string
  */
-	public function render(){
-		$input = $this->inputElement->setContent(join('', $this->options));
-		return "{$this->label}{$this->contentBefore}{$input}{$this->contentAfter}";
+	public function getField(){
+		$this->inputElement->setContent(join('', $this->options));
+		return parent::getField();
 	}
 }
