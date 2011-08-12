@@ -44,7 +44,16 @@ class FG_HTML_Form_DataHandler{
  * @return string
  */
 	public function render(){
-		$innerContent = array();
+		$this->execute();
+		return join('', $this->content);
+	}
+	
+/**
+ * Fill fields
+ * 
+ * @return FG_HTML_Form_DataHandler this object for method chaining
+ */
+	public function execute(){
 		foreach($this->content as $content){
 			if(is_a($content, 'FG_HTML_Form_Input_Fillable')){
 				if(!$content->isFilled()){
@@ -59,10 +68,8 @@ class FG_HTML_Form_DataHandler{
 						$content->fill($fieldData);
 				}
 			}
-			$innerContent[] = $content;
 		}
-		
-		return join('', $innerContent);
+		return $this;
 	}
 	
 /**
