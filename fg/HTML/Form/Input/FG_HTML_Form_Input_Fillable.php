@@ -30,4 +30,11 @@ interface FG_HTML_Form_Input_Fillable{
  * @return mixed
  */
 	public function isFilled();
+	
+/**
+ * Returns the field (or field list if is a collection)
+ * 
+ * @return FG_HTML_Element
+ */
+	public function getField();
 }

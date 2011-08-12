@@ -70,7 +70,7 @@ abstract class FG_HTML_Form_Input_AbstractInput extends FG_HTML_Form_Input_Abstr
  * @return string
  */
 	public function render(){
-		return "{$this->label}{$this->contentBefore}{$this->_getInputElementForRender()}{$this->contentAfter}";
+		return "{$this->label}{$this->getField()}";
 	}
 	
 /**
@@ -82,13 +82,22 @@ abstract class FG_HTML_Form_Input_AbstractInput extends FG_HTML_Form_Input_Abstr
  * 
  * @return FG_HTML_Element
  */
-	protected function _getInputElementForRender(){
+	public function getInputElementForRender(){
 		if(!$this->isFilled() && !is_null($this->default)){
 			$that = clone $this;
 			$that->fill($this->default);
 			return $that->getInputElement();
 		}
 		return $this->getInputElement();
+	}
+	
+/**
+ * Get field
+ * 
+ * @return string
+ */
+	public function getField(){
+		return $this->contentBefore . $this->getInputElementForRender() . $this->contentAfter;
 	}
 	
 /**

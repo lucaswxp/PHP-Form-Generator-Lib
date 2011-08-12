@@ -260,7 +260,7 @@ abstract class FG_HTML_Form_Input_Collection_AbstractCollection extends FG_HTML_
  * 
  * @return string
  */
-	public function render(){
+	public function getField(){
 		$output = $this->getHiddenInput();
 		foreach($this->itens as $item){
 			if($this->wrapper !== null){
@@ -272,6 +272,15 @@ abstract class FG_HTML_Form_Input_Collection_AbstractCollection extends FG_HTML_
 		}
 		
 		return $output;
+	}
+	
+/**
+ * Alias for getField()
+ * 
+ * @return string
+ */
+	public function render(){
+		return $this->getField();
 	}
 	
 /**
