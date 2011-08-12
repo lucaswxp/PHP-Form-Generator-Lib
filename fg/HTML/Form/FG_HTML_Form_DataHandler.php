@@ -39,6 +39,15 @@ class FG_HTML_Form_DataHandler{
 	}
 	
 /**
+ * Gets content
+ * 
+ * @return array
+ */
+	public function getContent(){
+		return $this->content;
+	}
+	
+/**
  * get form html
  * 
  * @return string
