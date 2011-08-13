@@ -6,33 +6,11 @@
  * @package fg.HTML.Form.Input
  */
 
-require_once dirname(__FILE__) . '/FG_HTML_Form_Input_Fillable.php';
-require_once dirname(__FILE__) . '/FG_HTML_Form_Input_AbstractIdentifiable.php';
+require_once dirname(__FILE__) . '/FG_HTML_Form_Input_AbstractEntry.php';
 require_once dirname(dirname(dirname(__FILE__))) . '/FG_HTML_Element.php';
 require_once dirname(dirname(dirname(__FILE__))) . '/Element/FG_HTML_Element_Label.php';
 
-abstract class FG_HTML_Form_Input_AbstractInput extends FG_HTML_Form_Input_AbstractIdentifiable implements FG_HTML_Form_Input_Fillable, FG_HTML_Form_Input_Identifiable{
-
-/**
- * Before's content
- * 
- * @var string
- */
-	protected $contentBefore = '';
-	
-/**
- * After's content
- * 
- * @var string
- */
-	protected $contentAfter = '';
-	
-/**
- * Input's label
- * 
- * @var FG_HTML_Element_Label
- */
-	protected $label = null;
+abstract class FG_HTML_Form_Input_AbstractInput extends FG_HTML_Form_Input_AbstractEntry{
 	
 /**
  * The element
@@ -40,13 +18,6 @@ abstract class FG_HTML_Form_Input_AbstractInput extends FG_HTML_Form_Input_Abstr
  * @var FG_HTML_Element
  */
 	protected $inputElement;
-	
-/**
- * Default value. This is used when the input is not filled
- * 
- * @var mixed
- */
-	protected $default = null;
 	
 /**
  * Initializes object
@@ -65,39 +36,16 @@ abstract class FG_HTML_Form_Input_AbstractInput extends FG_HTML_Form_Input_Abstr
 	}
 	
 /**
- * Gets input's html representation
- * 
- * @return string
- */
-	public function render(){
-		return "{$this->label}{$this->getField()}";
-	}
-	
-/**
  * Gets input field for render.
  * 
- * Is necessary to use this method because of the default value property.
+ * This method manages the default value property as well.
  * The default value fill the input ones, therefore the isFilled() will never again
  * returns false, and that's no the expected behavior for a default value.
  * 
  * @return FG_HTML_Element
  */
-	public function getInputElementForRender(){
-		if(!$this->isFilled() && !is_null($this->default)){
-			$that = clone $this;
-			$that->fill($this->default);
-			return $that->getInputElement();
-		}
-		return $this->getInputElement();
-	}
-	
-/**
- * Get field
- * 
- * @return string
- */
 	public function getField(){
-		return $this->contentBefore . $this->getInputElementForRender() . $this->contentAfter;
+		return $this->getThis()->getInputElement();
 	}
 	
 /**
@@ -114,15 +62,6 @@ abstract class FG_HTML_Form_Input_AbstractInput extends FG_HTML_Form_Input_Abstr
  */
 	public function getInputElement(){
 		return $this->inputElement;
-	}
-	
-/**
- * Alias for render()
- * 
- * @return string
- */
-	public function __toString(){
-		return $this->render();
 	}
 	
 /**
@@ -153,77 +92,6 @@ abstract class FG_HTML_Form_Input_AbstractInput extends FG_HTML_Form_Input_Abstr
 	}
 	
 /**
- * Sets a HTML content before the input
- * 
- * @param string $content
- * @return FG_HTML_Form_Input_AbstractInput this object for method chaining
- */
-	public function setContentBefore($content){
-		$this->contentBefore = $content;
-		return $this;
-	}
-	
-/**
- * Returns the HTML content that is before this input
- * 
- * @return string
- */
-	public function getContentBefore(){
-		return $this->contentBefore;
-	}
-	
-/**
- * Sets a HTML content after the input
- * 
- * @param string $content
- * @return FG_HTML_Form_Input_AbstractInput this object for method chaining
- */
-	public function setContentAfter($content){
-		$this->contentAfter = $content;
-		return $this;
-	}
-	
-/**
- * Returns the HTML content that is after this input
- * 
- * @return string
- */
-	public function getContentAfter(){
-		return $this->contentAfter;
-	}
-	
-/**
- * Sets the input label
- * 
- * @param FG_HTML_Element_Label|string $label The label object or the label string
- * @return FG_HTML_Form_Input_AbstractInput this object for method chaining
- */
-	public function setLabel($label){
-		if(!is_a($label, 'FG_HTML_Element_Label')){
-			$labelObj = new FG_HTML_Element_Label();
-		
-			$label = $labelObj->setContent($label);
-			if($this->attr('id') === false && $name = $this->attr('name')){
-				$this->attr('id', $name);
-			}
-			
-			$label->attr('for', $this->attr('id'));
-		}
-		
-		$this->label = $label;
-		return $this;
-	}
-	
-/**
- * Gets the input label
- * 
- * @return FG_HTML_Element or null in case there's no defined label
- */
-	public function getLabel(){
-		return $this->label;
-	}
-	
-/**
  * Sets this input's value
  * 
  * @param mixed $value
@@ -244,25 +112,28 @@ abstract class FG_HTML_Form_Input_AbstractInput extends FG_HTML_Form_Input_Abstr
 	}
 	
 /**
- * Sets default "value" (fill) of this input
+ * Sets the entry label
  * 
- * The fill() method overwrite this one.
+ * You can pass a string or a FG_HTML_Element_Label
  * 
- * @param string $value
+ * @param FG_HTML_Element_Label|string $label The label object or the label string
  * @return FG_HTML_Form_Input_AbstractInput this object for method chaining
  */
-	public function setDefault($value){
-		$this->default = $value;
+	public function setLabel($label){
+		if(!is_a($label, 'FG_HTML_Element_Label')){
+			$Label = new FG_HTML_Element_Label();
+		
+			$label = $Label->setContent($label);
+			
+			if($this->attr('id') === false && $name = $this->attr('name')){
+				$this->attr('id', $name);
+			}
+			
+			$label->attr('for', $this->attr('id'));
+		}
+		
+		$this->Label = $label;
 		return $this;
-	}
-	
-/**
- * Get default value
- * 
- * @return mixed
- */
-	public function getDefault(){
-		return $this->default;
 	}
 	
 /**

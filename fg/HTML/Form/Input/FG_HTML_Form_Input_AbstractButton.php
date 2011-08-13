@@ -16,7 +16,7 @@ abstract class FG_HTML_Form_Input_AbstractButton extends FG_HTML_Form_Input_Abst
  * @return string
  */
 	public function render(){
-		return "{$this->contentBefore}{$this->inputElement}{$this->contentAfter}{$this->label}";
+		return "{$this->getEntry()}{$this->getLabel()}";
 	}
 	
 /**

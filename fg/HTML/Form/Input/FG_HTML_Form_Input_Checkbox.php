@@ -33,7 +33,7 @@ class FG_HTML_Form_Input_Checkbox extends FG_HTML_Form_Input_AbstractButton{
  */
 	public function render(){
 		$hidden = $this->getHiddenInput();
-		return "{$hidden}{$this->contentBefore}{$this->inputElement}{$this->contentAfter}{$this->label}";
+		return $hidden . parent::render();
 	}
 	
 /**

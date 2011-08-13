@@ -74,26 +74,6 @@ class FG_HTML_Form_Input_AbstractInput_Test extends PHPUnit_Framework_TestCase{
  * 
  * @return void
  */
-	public function testSetContentBefore(){
-		$input = $this->getMocked();
-		$this->assertEquals('before<input />', $input->setContentBefore('before')->render());
-	}
-	
-/**
- * test method
- * 
- * @return void
- */
-	public function testSetContentAfter(){
-		$input = $this->getMocked();
-		$this->assertEquals('<input />after', $input->setContentAfter('after')->render());
-	}
-	
-/**
- * test method
- * 
- * @return void
- */
 	public function testSetLabelWithString(){
 		$input = $this->getMocked();
 		$this->assertEquals('<label>My label: </label><input />', $input->setLabel('My label: ')->render());

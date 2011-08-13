@@ -6,13 +6,12 @@
  * @package fg.HTML.Form.Input.Collection
  */
 
-require_once dirname(dirname(__FILE__)) . '/FG_HTML_Form_Input_Fillable.php';
-require_once dirname(dirname(__FILE__)) . '/FG_HTML_Form_Input_AbstractIdentifiable.php';
+require_once dirname(dirname(__FILE__)) . '/FG_HTML_Form_Input_AbstractEntry.php';
 require_once dirname(dirname(__FILE__)) . '/FG_HTML_Form_Input_Hidden.php';
 require_once dirname(dirname(dirname(dirname(__FILE__)))) . '/FG_HTML_Element.php';
 require_once dirname(dirname(dirname(dirname(__FILE__)))) . '/Element/FG_HTML_Element_Label.php';
 
-abstract class FG_HTML_Form_Input_Collection_AbstractCollection extends FG_HTML_Form_Input_AbstractIdentifiable implements FG_HTML_Form_Input_Fillable{
+abstract class FG_HTML_Form_Input_Collection_AbstractCollection extends FG_HTML_Form_Input_AbstractEntry{
 	
 /**
  * This itens of this collection
@@ -200,7 +199,7 @@ abstract class FG_HTML_Form_Input_Collection_AbstractCollection extends FG_HTML_
 		$this->wrapper = $wrapper;
 		return $this;
 	}
-	
+
 /**
  * Gets the wrapper
  * 
@@ -208,6 +207,24 @@ abstract class FG_HTML_Form_Input_Collection_AbstractCollection extends FG_HTML_
  */
 	public function getWrapper(){
 		return $this->wrapper;
+	}
+
+/**
+ * Sets the collection's label as a div
+ * 
+ * You can pass a string or a FG_HTML_Element object
+ * 
+ * @param FG_HTML_Element|string $label The label object or the label string
+ * @return FG_HTML_Form_Input_Collection_AbstractCollection this object for method chaining
+ */
+	public function setLabel($label){
+		if(!is_a($label, 'FG_HTML_Element')){
+			$Label = new FG_HTML_Element('div');
+			$label = $Label->setContent($label);
+		}
+		
+		$this->Label = $label;
+		return $this;
 	}
 	
 /**
@@ -262,7 +279,8 @@ abstract class FG_HTML_Form_Input_Collection_AbstractCollection extends FG_HTML_
  */
 	public function getField(){
 		$output = $this->getHiddenInput();
-		foreach($this->itens as $item){
+		
+		foreach($this->getThis()->itens as $item){
 			if($this->wrapper !== null){
 				$wrapper = clone $this->wrapper;
 				$output .= $wrapper->setContent($item);
@@ -272,23 +290,5 @@ abstract class FG_HTML_Form_Input_Collection_AbstractCollection extends FG_HTML_
 		}
 		
 		return $output;
-	}
-	
-/**
- * Alias for getField()
- * 
- * @return string
- */
-	public function render(){
-		return $this->getField();
-	}
-	
-/**
- * Alias for render()
- * 
- * @return string
- */
-	public function __toString(){
-		return $this->render();
 	}
 }

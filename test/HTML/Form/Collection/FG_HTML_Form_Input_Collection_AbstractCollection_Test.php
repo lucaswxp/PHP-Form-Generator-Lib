@@ -34,6 +34,39 @@ class FG_HTML_Form_Input_Collection_AbstractCollection_Test extends PHPUnit_Fram
 			</div>'
 		), $c->add('myvalue', false)->render());
 	}
+
+/**
+ * test method
+ * 
+ * @return void
+ */
+	public function testSetLabelWithString(){
+		$c = $this->getMocked();
+		$this->assertEquals($this->output(
+			'
+			<div>hey</div>
+			<div>
+				<input value="myvalue" id="name_1" name="name[]" />
+			</div>'
+		), $c->setLabel('hey')->add('myvalue', false)->render());
+	}
+	
+/**
+ * test method
+ * 
+ * @return void
+ */
+	public function testSetLabelWithObject(){
+		$c = $this->getMocked();
+		$label = new FG_HTML_Element('h2');
+		$this->assertEquals($this->output(
+			'
+			<h2>yo</h2>
+			<div>
+				<input value="myvalue" id="name_1" name="name[]" />
+			</div>'
+		), $c->setLabel($label->setContent('yo'))->add('myvalue', false)->render());
+	}
 	
 /**
  * test method
@@ -216,6 +249,60 @@ class FG_HTML_Form_Input_Collection_AbstractCollection_Test extends PHPUnit_Fram
 				<label for="name_4">label4</label>
 			</div>'
 		), $c->add('label')->add('label2')->add('label3')->add('label4')->render());
+	}
+	
+/**
+ * test method
+ * 
+ * @return void
+ */
+	public function testUseDefaultValues(){
+		$c = $this->getMocked();
+		$this->assertEquals($this->output(
+			'<div>
+				<input value="1" id="name_1" name="name[]" />
+				<label for="name_1">label</label>
+			</div>
+			<div>
+				<input value="2" id="name_2" name="name[]" checked="checked" />
+				<label for="name_2">label2</label>
+			</div>
+			<div>
+				<input value="3" id="name_3" name="name[]" />
+				<label for="name_3">label3</label>
+			</div>
+			<div>
+				<input value="4" id="name_4" name="name[]" checked="checked" />
+				<label for="name_4">label4</label>
+			</div>'
+		), $c->add('label')->add('label2')->add('label3')->add('label4')->setDefault(array(2,4))->render());
+	}
+	
+/**
+ * test method
+ * 
+ * @return void
+ */
+	public function testUseDefaultValuesWhenWasAlreadyFilled(){
+		$c = $this->getMocked();
+		$this->assertEquals($this->output(
+			'<div>
+				<input value="1" id="name_1" name="name[]" checked="checked" />
+				<label for="name_1">label</label>
+			</div>
+			<div>
+				<input value="2" id="name_2" name="name[]" />
+				<label for="name_2">label2</label>
+			</div>
+			<div>
+				<input value="3" id="name_3" name="name[]" />
+				<label for="name_3">label3</label>
+			</div>
+			<div>
+				<input value="4" id="name_4" name="name[]" />
+				<label for="name_4">label4</label>
+			</div>'
+		), $c->add('label')->add('label2')->add('label3')->add('label4')->setDefault(array(2,4))->fill(1)->render());
 	}
 	
 /**
