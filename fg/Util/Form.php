@@ -33,6 +33,18 @@ class Form{
 	}
 	
 /**
+ * Creates a form tag (with ending tag hided)
+ * 
+ * @param string $action
+ * @param array $fields
+ * @return FG_HTML_Element_Form
+ */
+	public function start($action = null){
+		$form = new FG_HTML_Element_Form();
+		return $form->setHideEndTag(true)->setAction($action);
+	}
+	
+/**
  * Creates a form. The difference between create() and init(), is that init
  * do not return a tag element like create() does (FG_HTML_Element_Form). It returns only
  * a form fields handler.

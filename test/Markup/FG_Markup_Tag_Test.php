@@ -18,6 +18,7 @@ class FG_Markup_Tag_Test extends PHPUnit_Framework_TestCase{
 	public function testBasicTag(){
 		$tag = new FG_Markup_Tag('tag');
 		$this->assertEquals('<tag></tag>', $tag->render());
+		$this->assertEquals('</tag>', $tag->end());
 	}
 
 /**
@@ -92,6 +93,16 @@ class FG_Markup_Tag_Test extends PHPUnit_Framework_TestCase{
 	public function testIfAttrNotDefinedReturnFalse(){
 		$tag = new FG_Markup_Tag('tag');
 		$this->assertFalse($tag->getAttribute('fail'));
+	}
+	
+/**
+ * test method
+ * 
+ * @return void
+ */
+	public function testHideFinishTag(){
+		$tag = new FG_Markup_Tag('tag');
+		$this->assertEquals('<tag attr="">', $tag->attr('attr', '')->setHideEndTag(true)->render());
 	}
 	
 /**

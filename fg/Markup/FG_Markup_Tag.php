@@ -39,6 +39,13 @@ class FG_Markup_Tag{
 	protected $content = false;
 	
 /**
+ * Is to hide finish tag
+ * 
+ * @var mixed
+ */
+	protected $hideEndTag = false;
+	
+/**
  * The tag's attributes
  * 
  * @var array
@@ -95,6 +102,17 @@ class FG_Markup_Tag{
  */
 	public function setAttribute($name, $value){
 		$this->attributes[$name] = (string)$value;
+		return $this;
+	}
+	
+/**
+ * Set hide finish tag
+ * 
+ * @param bool $bool
+ * @return FG_Markup_Tag this object for method chaining
+ */
+	public function setHideEndTag($bool){
+		$this->hideEndTag = $bool;
 		return $this;
 	}
 	
@@ -230,9 +248,18 @@ class FG_Markup_Tag{
 		if($this->isVoid()){
 			$output = sprintf('<%s%s />', $this->name, $this->parseAttributes());
 		}else{
-			$output = sprintf('<%s%s>%s</%s>', $this->name, $this->parseAttributes(), $this->content, $this->name);
+			$output = sprintf('<%s%s>%s' . ($this->hideEndTag ? '' : $this->end()), $this->name, $this->parseAttributes(), $this->content);
 		}
 		return $output;
+	}
+	
+/**
+ * Gets finish tag
+ * 
+ * @return string
+ */
+	public function end(){
+		return '</' . $this->name . '>';
 	}
 	
 /**
