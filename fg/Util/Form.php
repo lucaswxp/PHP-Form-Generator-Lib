@@ -24,36 +24,33 @@ class Form{
  * Creates a form tag
  * 
  * @param string $action
+ * @param bool $returnData
  * @param array $fields
  * @return FG_HTML_Element_Form
  */
-	public function create($action = null){
-		$form = new FG_HTML_Element_Form();
-		return $form->setAction($action);
+	public function create($action = null, $returnData = false){
+		if($action === true && func_num_args() == 1){
+			$returnData = true;
+			unset($action);
+		}
+		$form = new FG_HTML_Element_Form($returnData);
+		
+		if(isset($action))
+			$form->setAction($action);
+		
+		return $form;
 	}
 	
 /**
- * Creates a form tag (with ending tag hided)
- * 
- * @param string $action
- * @param array $fields
- * @return FG_HTML_Element_Form
- */
-	public function start($action = null){
-		$form = new FG_HTML_Element_Form();
-		return $form->setHideEndTag(true)->setAction($action);
-	}
-	
-/**
- * Creates a form. The difference between create() and init(), is that init
+ * Creates a form data handler. The difference between create() and init(), is that init
  * do not return a tag element like create() does (FG_HTML_Element_Form). It returns only
  * a form fields handler.
  * 
- * @param bool $returnField See FG_HTML_Form_DataHandler::__construct()
+ * @param bool $returnData See FG_HTML_Form_DataHandler::__construct()
  * @return FG_HTML_Form_DataHandler
  */
-	public function init($returnField = false){
-		return new FG_HTML_Form_DataHandler($returnField);
+	public function init($returnData = false){
+		return new FG_HTML_Form_DataHandler($returnData);
 	}
 
 /**

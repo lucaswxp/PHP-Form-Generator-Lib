@@ -23,11 +23,11 @@ class FG_HTML_Form_DataHandler{
 	public $data = array();
 	
 /**
- * Return fields?
+ * ->add() return the inserted data instead of self object?
  * 
  * @var array
  */
-	private $returnField = false;
+	private $returnData = false;
 	
 /**
  * @var array
@@ -38,10 +38,10 @@ class FG_HTML_Form_DataHandler{
  * If you wish, you can configure if the method add return the field itself
  * or if will return self instance
  * 
- * @param bool $returnField
+ * @param bool $returnData
  */
-	public function __construct($returnField = false){
-		$this->returnField = $returnField;
+	public function __construct($returnData = false){
+		$this->returnData = $returnData;
 	}
 	
 /**
@@ -53,7 +53,7 @@ class FG_HTML_Form_DataHandler{
 	public function add($content){
 		$this->content[] = $content;
 		
-		if($this->returnField){
+		if($this->returnData){
 			$this->execute();
 			return $content;
 		}else{

@@ -52,13 +52,30 @@ class FG_HTML_Element_Form_Test extends PHPUnit_Framework_TestCase{
 		$text = new FG_HTML_Form_Input_Text();
 		$textarea = new FG_HTML_Form_Input_TextArea();
 		
+		$this->assertSame($tag->add($text), $tag);
+		$tag->add($textarea);
+		
 		$this->assertEquals(
 			$this->output('
 			<form>
 				<input type="text" />
 				<textarea></textarea>
 			</form>
-			'), $tag->add($text)->add($textarea)->render());
+			'), $tag->render());
+	}
+
+/**
+ * test method
+ * 
+ * @return void
+ */
+	public function testAddInputsWithDifferentReturnType(){
+		$tag = new FG_HTML_Element_Form(true);
+		$text = new FG_HTML_Form_Input_Text();
+		$textarea = new FG_HTML_Form_Input_TextArea();
+		
+		$this->assertEquals('<form>', $tag->render());
+		$this->assertSame($tag->add($text), $text);
 	}
 	
 /**

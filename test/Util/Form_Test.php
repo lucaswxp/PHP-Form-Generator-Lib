@@ -31,6 +31,16 @@ class Form_Test extends PHPUnit_Framework_TestCase{
 		$this->assertInstanceOf('FG_HTML_Form_Input_Collection_Checkbox', Form::checkboxes('some'));
 		$this->assertInstanceOf('FG_HTML_Form_Input_Collection_Radio', Form::radios('some'));
 	}
+/**
+ * test method
+ * 
+ * @return void
+ */
+	public function testFormCreate(){
+		$this->assertEquals('<form>', Form::create(true)->render());
+		$this->assertEquals('<form action="">', Form::create('', true)->render());
+		$this->assertEquals('<form></form>', Form::create()->render());
+	}
 	
 /**
  * test method

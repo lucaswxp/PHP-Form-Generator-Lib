@@ -18,9 +18,14 @@ class FG_HTML_Element_Form extends FG_HTML_Element{
 	
 /**
  * Initializes the element
+ * 
+ * @param bool $returnData
  */
-	public function __construct(){
-		$this->dataHandler = new FG_HTML_Form_DataHandler();
+	public function __construct($returnData = false){
+		if($returnData)
+			$this->setHideEndTag(true);
+			
+		$this->dataHandler = new FG_HTML_Form_DataHandler($returnData);
 		parent::__construct('form');
 	}
 	
@@ -28,15 +33,14 @@ class FG_HTML_Element_Form extends FG_HTML_Element{
  * Adds content to the form
  * 
  * @param FG_HTML_Form_Input_Fillable|string $content
- * @return FG_HTML_Element_Form this object for method chaining
+ * @return mixed
  */
 	public function add($content){
 		if(is_a($content, 'FG_HTML_Form_Input_File') && !$this->attr('enctype')){
 			$this->setMultipart(true);
 		}
 
-		$this->dataHandler->add($content);
-		return $this;
+		return ($content = $this->dataHandler->add($content)) === $this->dataHandler ? $this : $content;
 	}
 	
 /**
