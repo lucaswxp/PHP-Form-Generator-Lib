@@ -39,8 +39,8 @@ class FG_HTML_Element_Form extends FG_HTML_Element{
 		if(is_a($content, 'FG_HTML_Form_Input_File') && !$this->attr('enctype')){
 			$this->setMultipart(true);
 		}
-
-		return ($content = $this->dataHandler->add($content)) === $this->dataHandler ? $this : $content;
+		$return = $this->dataHandler->add($content);
+		return $return === $this->dataHandler ? $this : $return;
 	}
 	
 /**
@@ -49,7 +49,8 @@ class FG_HTML_Element_Form extends FG_HTML_Element{
  * @return string
  */
 	public function render(){
-		$this->setContent($this->dataHandler->render());
+		if(!$this->dataHandler->isToReturnData())
+			$this->setContent($this->dataHandler->render());
 		return parent::render();
 	}
 	

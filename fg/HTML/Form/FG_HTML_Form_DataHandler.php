@@ -60,7 +60,7 @@ class FG_HTML_Form_DataHandler{
 			return $this;
 		}
 	}
-	
+
 /**
  * Gets content
  * 
@@ -68,6 +68,15 @@ class FG_HTML_Form_DataHandler{
  */
 	public function getContent(){
 		return $this->content;
+	}
+	
+/**
+ * Is to return data?
+ * 
+ * @return array
+ */
+	public function isToReturnData(){
+		return $this->returnData;
 	}
 	
 /**
