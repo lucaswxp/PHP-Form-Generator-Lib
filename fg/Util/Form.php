@@ -31,6 +31,18 @@ class Form{
 		$form = new FG_HTML_Element_Form();
 		return $form->setAction($action);
 	}
+	
+/**
+ * Creates a form. The difference between create() and init(), is that init
+ * do not return a tag element like create() does (FG_HTML_Element_Form). It returns only
+ * a form fields handler.
+ * 
+ * @param bool $returnField See FG_HTML_Form_DataHandler::__construct()
+ * @return FG_HTML_Form_DataHandler
+ */
+	public function init($returnField = false){
+		return new FG_HTML_Form_DataHandler($returnField);
+	}
 
 /**
  * Create a new text input

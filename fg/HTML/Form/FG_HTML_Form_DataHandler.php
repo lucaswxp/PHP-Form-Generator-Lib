@@ -23,19 +23,42 @@ class FG_HTML_Form_DataHandler{
 	public $data = array();
 	
 /**
+ * Return fields?
+ * 
+ * @var array
+ */
+	private $returnField = false;
+	
+/**
  * @var array
  */
 	private $_pathStorage = array();
 	
 /**
+ * If you wish, you can configure if the method add return the field itself
+ * or if will return self instance
+ * 
+ * @param bool $returnField
+ */
+	public function __construct($returnField = false){
+		$this->returnField = $returnField;
+	}
+	
+/**
  * Adds content to the form
  * 
  * @param FG_HTML_Form_Input_Fillable|string $content
- * @return FG_HTML_Form_DataHandler this object for method chaining
+ * @return mixed
  */
 	public function add($content){
 		$this->content[] = $content;
-		return $this;
+		
+		if($this->returnField){
+			$this->execute();
+			return $content;
+		}else{
+			return $this;
+		}
 	}
 	
 /**

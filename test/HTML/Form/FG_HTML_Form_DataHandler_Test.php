@@ -159,6 +159,22 @@ class FG_HTML_Form_DataHandler_Test extends PHPUnit_Framework_TestCase{
 				<textarea></textarea>
 			'), $tag->add($text)->add($textarea)->render());
 	}
+
+/**
+ * test method
+ * 
+ * @return void
+ */
+	public function testReturnTheFieldsWithAddMethod(){
+		$handler = new FG_HTML_Form_DataHandler(true);
+		$text = new FG_HTML_Form_Input_Text();
+		
+		$handler->populate(array('hey' => 'yoo'));
+		
+		$this->assertSame($text, $handler->add($text));
+		
+		$this->assertEquals('<input type="text" name="hey" value="yoo" />', $handler->add($text->setName('hey'))->render());
+	}
 	
 /**
  * test method
