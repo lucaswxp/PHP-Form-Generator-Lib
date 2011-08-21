@@ -34,6 +34,21 @@ class FG_HTML_Form_Input_Collection_AbstractCollection_Test extends PHPUnit_Fram
 			</div>'
 		), $c->add('myvalue', false)->render());
 	}
+	
+/**
+ * test method
+ * 
+ * @return void
+ */
+	public function testAddElementWithLabelAsAElement(){
+		$c = $this->getMocked();
+		$this->assertEquals($this->output(
+			'<div>
+				<input value="myvalue" id="name_1" name="name[]" />
+				<label for="name_1"><img /></label>
+			</div>'
+		), $c->add('myvalue', new FG_HTML_Element('img'))->render());
+	}
 
 /**
  * test method

@@ -109,15 +109,14 @@ abstract class FG_HTML_Form_Input_Collection_AbstractCollection extends FG_HTML_
 		if(is_a($itemLabel, 'FG_HTML_Element_Label')){
 			$label = $itemLabel;
 			$isLabelSpecific = true;
-		// string that will be converted to label object
-		}elseif(is_string($itemLabel)){
-			$label = new FG_HTML_Element_Label();
-			$label->setContent($itemLabel);
-			$isLabelSpecific = false;
-			
 		// no label
 		}elseif($itemLabel === false){
 			$label = $itemLabel;
+		// string that will be converted to label object
+		}else{
+			$label = new FG_HTML_Element_Label();
+			$label->setContent($itemLabel);
+			$isLabelSpecific = false;
 		}
 		
 		// create item
