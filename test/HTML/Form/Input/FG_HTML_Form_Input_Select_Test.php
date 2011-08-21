@@ -35,6 +35,23 @@ class FG_HTML_Form_Input_Select_Test extends PHPUnit_Framework_TestCase{
 						)
 			, $input->add('value', 'Text')->render());
 	}
+	
+/**
+ * test method
+ * 
+ * @return void
+ */
+	public function testSetDefault(){
+		$input = new FG_Html_Form_Input_Select();
+		$this->assertEquals(
+			$this->output(
+				'<select>
+					<option value="value" selected="selected">Text</option>
+				</select>'
+						)
+			, $input->add('value', 'Text')->setDefault('value')->render());
+	}
+	
 /**
  * test method
  * 

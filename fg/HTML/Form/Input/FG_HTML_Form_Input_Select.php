@@ -137,7 +137,6 @@ class FG_HTML_Form_Input_Select extends FG_HTML_Form_Input_AbstractInput impleme
  * @return string
  */
 	public function getField(){
-		$this->inputElement->setContent(join('', $this->options));
-		return parent::getField();
+		return parent::getField()->setContent(join('', $this->options));
 	}
 }
