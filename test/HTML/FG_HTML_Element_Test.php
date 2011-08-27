@@ -51,5 +51,8 @@ class FG_HTML_Element_Test extends PHPUnit_Framework_TestCase{
 		$this->assertEquals('<a></a>', $tag->attr('checked', false)->render());
 		$this->assertFalse($tag->isAttr('checked'));
 		$this->assertFalse($tag->attr('checked'));
+		
+		$tag = new FG_HTML_Element('a');
+		$this->assertEquals('<a></a>', $tag->attr('checked', 0)->render());
 	}
 }

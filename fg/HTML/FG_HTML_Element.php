@@ -53,7 +53,7 @@ class FG_HTML_Element extends FG_Markup_Tag{
 			$value = self::slugifyAttr($value);
 		}
 
-		if(in_array($name, self::$_boolAttrs) && is_bool($value)){
+		if(in_array($name, self::$_boolAttrs)){
 			if($value){
 				$value = $name;
 			}else{
