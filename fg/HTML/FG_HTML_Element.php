@@ -54,7 +54,7 @@ class FG_HTML_Element extends FG_Markup_Tag{
 		}
 
 		if(in_array($name, self::$_boolAttrs)){
-			if($value){
+			if($value === true || $value == 1){
 				$value = $name;
 			}else{
 				$this->unsetAttribute($name);
